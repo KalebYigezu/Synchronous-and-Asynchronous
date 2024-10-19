@@ -1,34 +1,32 @@
-import requests
+import time
 
-def fetch_data(url):
-    response = requests.get(url)
-    return response.text
+def task1():
+    time.sleep(2)
+    print("Task 1 completed")
 
-data1 = fetch_data("https://www.example.com/data1")
-data2 = fetch_data("https://www.example.com/data2")
-print(data1)
-print(data2)
+def task2():
+    time.sleep(1)
+    print("Task 2 completed")
+
+task1()
+task2()
 
                 Synchronous
 --------------------------------------------------
                 Asynchronous
 
 import asyncio
-import aiohttp
 
-async def fetch_data(url):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            return await response.text()
+async def task1():
+    await asyncio.sleep(2)
+    print("Task 1 completed")
+
+async def task2():
+    await asyncio.sleep(1)
+    print("Task 2 completed")
 
 async def main():
-    data1, data2 = await asyncio.gather(
-        fetch_data("https://www.example.com/data1"),
-        fetch_data("https://www.example.com/data2")
-    )
-    print(data1)
-    print(data2)
+    await asyncio.gather(task1(), task2())
 
-if __name__ == "__main__":
-    asyncio.run(main())
+asyncio.run(main())
 
